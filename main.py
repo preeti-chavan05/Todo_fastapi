@@ -21,17 +21,22 @@ def get_all_todos():
     return todos
 
 @app.put("/todos/{todo_id}")
-def update_todo(todo_id: int, updated_todo:Todo):
-    for index, todo in enumerate(todos):
-        if todo.id == todo_id:
-            todos[index] = updated_todo
-            return {"message": "Todo updated successfully", "todo":updated_todo}
+def update_todo(todo_id: int, updated_todo: Todo):
+    for i in range(len(todos)):
+        if todos[i].id == todo_id:
+            todos[i] = updated_todo
+            return {"message": "Todo updated successfully", "todo": updated_todo}
+
     raise HTTPException(status_code=404, detail="Todo not found")
+
 
 @app.delete("/todos/{todo_id}")
 def delete_todo(todo_id: int):
-    for index, todo in enumerate(todos):
-        if todo.id == todo_id:
-            deleted = todos.pop(index)
-            return {"message": "Todo deleted successfully", "todo":deleted}
+    for i in range(len(todos)):
+        if todos[i].id == todo_id:
+            deleted = todos.pop(i)
+            return {"message": "Todo deleted successfully", "todo": deleted}
+
     raise HTTPException(status_code=404, detail="Todo not found")
+
+
